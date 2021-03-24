@@ -1,0 +1,65 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "version": "1.71.3",
+        "preferLocal": true,
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "version": "1.71.3",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/backend/",
+      "target": {
+        "type": "destination",
+        "name": "BACKEND-IPROVIDER"
+      },
+      "description": "PM_PIPELINE"
+    },
+    {
+      "path": "/ERP/",
+      "target": {
+        "type": "destination",
+        "name": "ERP-QAS"
+      },
+      "description": "ERP-SERVICE"
+    },
+    {
+      "path": "/backendhana",
+      "target": {
+        "type": "destination",
+        "name": "HANAXS-SERVICE"
+      },
+      "description": "Back-Dev-Hana"
+    },
+    {
+      "path": "/XS_IPROVIDER_ENTREGA/",
+      "target": {
+        "type": "destination",
+        "name": "HANAXS-SERVICE"
+      },
+      "description": "XS-SERVICE"
+    }
+  ],
+  "authenticationMethod": "none",
+  "sendWelcomeFileRedirect": true,
+  "headerWhiteList": [
+    "sToken",
+    "sIdTransaccion",
+    "sAplicacion"
+  ]
+}

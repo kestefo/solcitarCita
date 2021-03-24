@@ -1,0 +1,138 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Page1" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:l				="sap.ui.layout"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog id="DialogEntregasTemp"  horizontalScrolling="true" showHeader="true"   state="None" stretch="false" title="Solicitar Cita" type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding"
+        contentHeight="100%" 
+        contentWidth="100%">
+        <content>
+        	<form:Form width="auto" editable="true" visible="true" class="sapUiResponsiveMargin">
+                <form:title>
+                    <core:Title text="Solicitud de Cita" level="Auto"/>
+                </form:title>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                        	<form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Fecha de Entrega" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                	<Text text="{RegistroEntrega>/fecha/FECHAS}" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Hora de Entrega" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="{RegistroEntrega>/fecha/HORARIOS}" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Cantidad de Entregas" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text id="nEntregaSeleccionadas" text="" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+        	<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false" class="sapUiResponsiveMargin">
+                <items>		
+					<ui:Table 
+						id					="tableEntregasRegistradas" 
+						rows				="{path: 'RegistroEntrega>/Data'}"
+						selectionMode		="None" 
+						visibleRowCount		="11" 
+						ariaLabelledBy		="title" 
+						busyIndicatorDelay	="500"
+						enableBusyIndicator	="true"
+						rowSelectionChange	="ValidarCamposEntrega">
+						<ui:extension>
+							<OverflowToolbar style="Clear">
+								<Title  text="Entregas Seleccionadas"/>
+								<ToolbarSpacer/>
+							</OverflowToolbar>
+						</ui:extension>
+						<ui:columns>
+							<ui:Column width="auto" hAlign="Center" sortProperty="" filterProperty="" showFilterMenuEntry="true" showSortMenuEntry="true">
+								<Label text="Cond. Entrega"/>
+								<ui:template>
+									<Text text="{RegistroEntrega>lugdestino}" visible="true"/>
+									<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+								</ui:template>
+							</ui:Column>
+							<ui:Column width="auto" hAlign="Center" sortProperty="Vbeln" filterProperty="Vbeln" showFilterMenuEntry="true" showSortMenuEntry="true">
+								<Label text="Entrega"/>
+								<ui:template >
+									<Text text="{RegistroEntrega>DescripcionGeneralEntrega}"/>
+								</ui:template>
+							</ui:Column>
+							<ui:Column width="auto" hAlign="Left" sortProperty="Namew" filterProperty="Namew" showFilterMenuEntry="true" showSortMenuEntry="true">
+								<Label text="Descripción de Centro"/>
+								<ui:template>
+									<Text text="{RegistroEntrega>Namew}"/>
+								</ui:template>
+							</ui:Column>
+							<!--<ui:Column width="8rem" hAlign="Center" sortProperty="Lfdat" filterProperty="Lfdat" showFilterMenuEntry="true" showSortMenuEntry="true">-->
+							<!--	<Label text="Fecha de entrega"/>-->
+							<!--	<ui:template>-->
+							<!--		<Text text="{RegistroEntrega>Lfdat}"/>-->
+									<!--<ObjectIdentifier title="{Proyect>Fe}" text="" titleActive="false" visible="true"/>-->
+							<!--	</ui:template>-->
+							<!--</ui:Column>-->
+							<!--<ui:Column width="8rem" hAlign="Center" sortProperty="Lfuhr" filterProperty="Lfuhr" showFilterMenuEntry="true" showSortMenuEntry="true">-->
+							<!--	<Label text="Hora de entrega"/>-->
+							<!--	<ui:template>-->
+							<!--		<Text text="{RegistroEntrega>Lfuhr}"/>-->
+							<!--	</ui:template>-->
+							<!--</ui:Column>-->
+							<ui:Column width="auto" hAlign="Center" sortProperty="Btgew" filterProperty="Btgew" showFilterMenuEntry="true" showSortMenuEntry="true">
+								<Label text="Peso Total(Kg)"/>
+								<ui:template>
+									<ObjectNumber
+									textAlign="Center"
+									number="{RegistroEntrega>pesototalbulto}"/>
+								</ui:template>
+							</ui:Column>
+							<ui:Column width="auto" hAlign="Center">
+								<Label text="Número de Guia"/>
+								<ui:template>
+									<MaskInput mask="CCCC-CCCCCCCC" value="{RegistroEntrega>Zbolnr}" enabled="true" placeholderSymbol="_"
+										placeholder="YYYY-ZZZZZZZZ" required="true">
+										<rules>
+											<MaskInputRule maskFormatSymbol="C" regex="[A-Z0-9]"/>
+										</rules>
+									</MaskInput>
+								</ui:template>
+							</ui:Column>
+						</ui:columns>
+					</ui:Table>
+				</items>
+			</VBox>
+        </content>
+        
+        <buttons>
+            <!--<Button text="Guardar" icon="sap-icon://save" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CancelarGuardarRoles1"/>-->
+    	   <Button text="Registrar Cita" type="Accept" icon="sap-icon://accept" iconFirst="true" width="auto" enabled="true" visible="{Proyect>/Visible1}"
+										tooltip="Registrar Citas" iconDensityAware="false" press="confirmarCentro"/>
+    	   <Button text="Cerrar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialogEntregasTemp"/>
+        </buttons>
+        
+        
+    
+    </Dialog>
+</core:FragmentDefinition>

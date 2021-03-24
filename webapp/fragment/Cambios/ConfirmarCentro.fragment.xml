@@ -1,0 +1,106 @@
+<core:FragmentDefinition 
+xmlns:core="sap.ui.core" 
+controllerName="com.rava.project.controller.Page1"
+xmlns="sap.m"
+xmlns:form="sap.ui.layout.form" 
+xmlns:l="sap.ui.layout">
+	<Dialog id="DialogConfirmarCentro" horizontalScrolling="true" showHeader="false" state="None" stretch="false" title="" type="Standard"
+		verticalScrolling="true" class="sapUiResponsiveContentPadding">
+		<content>
+			<form:Form width="auto" editable="true" visible="true">
+				<form:title/>
+				<form:formContainers>
+					<form:FormContainer visible="true">
+						<form:formElements>
+							<form:FormElement id="elementDireccion" visible="true">
+								<form:label>
+									<Label text="Direccion" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+									
+									<TextArea
+									id="input"
+		                        	value="{Proyect>/Direccion}" 
+		                        	maxLength ="100"
+		                        	rows="5" />
+		                        	
+									<!--<Input id="input" type="Text" maxTokens="2" maxLength="8" value="{Proyect>/Direccion}" width="100%" showValueHelp="false"></Input>-->
+								</form:fields>
+							</form:FormElement>	
+							
+							<form:FormElement visible="{Proyect>/ElementosyTablas}" >
+								<form:label>
+									<Label text="Nº DNI" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+									<MultiInput id="multiInput1" liveChange="ValidarDni" type="Text" maxTokens="4" maxLength="8" value="{/recipient/inputDni}" width="25rem" showValueHelp="false"></MultiInput>
+								</form:fields>
+							</form:FormElement>
+							
+							<form:FormElement visible="{Proyect>/ElementosyTablas}" >
+								<form:label>
+									<Label text="Placa de Vehiculo" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+									<MultiInput id="multiInput2" liveChange="ValidarPlaca" maxLength="6" maxTokens="1" width="25rem" showValueHelp="false" value="{/recipient/inputVeh}"/>
+								</form:fields>
+							</form:FormElement>
+							
+							<form:FormElement id="elementEmail" visible="true" >
+								<form:label>
+									<Label text="Email" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+										<Input
+											id="inputEmail"
+											type="Email"
+											placeholder="Email contacto" />
+								</form:fields>
+							</form:FormElement>
+							
+							<form:FormElement id="elementTelefono" visible="true" >
+								<form:label>
+									<Label text="Telefono" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+									<Input
+										id="inputTel"
+										type="Tel"
+										placeholder="Ingresar número de telefono"/>
+								</form:fields>
+							</form:FormElement>
+							
+							<form:FormElement visible="true">
+								<form:label>
+									<Label text="Adjuntar Documentos" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+								</form:label>
+								<form:fields>
+									<Button text="" press="AdjuntarDocumentos" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true"
+										icon="sap-icon://attachment" iconDensityAware="false">
+										<layoutData>
+											<l:GridData span="XL2 L1 M2 S2"/>
+										</layoutData>
+									</Button>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+						<form:title/>
+					</form:FormContainer>
+				</form:formContainers>
+				<form:layout>
+					<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+						emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+				</form:layout>
+			</form:Form>
+		</content>
+		<buttons>
+			<Button icon="sap-icon://save" text="Guardar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="false"
+				iconDensityAware="false" press="pressTest"/>
+			<Button text="Cancelar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="CancelarGuardarRoles"/>
+		</buttons>
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+	</Dialog>
+</core:FragmentDefinition>

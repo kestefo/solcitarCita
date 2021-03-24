@@ -1,0 +1,111 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Page1" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:l				="sap.ui.layout"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog id="DialogSelecFechaProg"  horizontalScrolling="true" showHeader="true"   state="None" stretch="false" title="Seleccionar Fecha" type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding"
+        contentHeight="60%" 
+        contentWidth="55%">
+        <content>
+			<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+				<items>
+					<Label text="Ingrese Fecha" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					<!--<Input type="Text"  placeholder	="Ingrese Fecha" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" class="sapUiTinyMarginBegin"/>-->
+					<!--<Input type="Text"  placeholder	="Ingrese Fecha" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" class="sapUiMediumMarginBegin"/>-->
+					<DatePicker id="fecharangoInicial" change="eventchangeFechainicialProg" navigate="cambioRangoInicialProg" placeholder="DD.MM.YYYY" width="auto" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd.MM.yyyy" displayFormat = "dd.MM.yyyy"/>
+					<Label text="Hasta" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					<DatePicker id="fecharangoFinal" change="eventchangeFechaFinal" navigate="cambioRango" placeholder="DD.MM.YYYY" width="auto" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd.MM.yyyy" displayFormat = "dd.MM.yyyy"/>
+					<Label text="Nº Entrega" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit" visible="true" class="sapUiLargeMarginBegin"/>
+					<Input id="nEntrega" type="Text" value=""  showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" class="sapUiSmallMarginBegin"/>
+				</items>
+			</HBox>
+				
+						
+			<ui:Table
+					id="idTableRegistroDisponible"
+            		rows				="{Proyect>/DataFecha}"	
+					selectionMode		="Multi"
+					selectionBehavior	=""
+					visibleRowCount		="8"
+					rowSelectionChange	="ValidarCamposFecha"
+					enableSelectAll="false"
+					ariaLabelledBy	="title">
+    <!--        	<ui:extension>-->
+				<!--	<OverflowToolbar>-->
+				<!--		<Title text="Proveedor (3)"/>-->
+				<!--	</OverflowToolbar>-->
+				<!--</ui:extension>-->
+            	
+				<ui:columns>
+													
+					<ui:Column width="auto" hAlign="Center">
+						<Label text="Fecha" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{path: 'Proyect>FECHAS'}" />
+							<!--<Text text="{Proyect>Fe}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="auto" hAlign="Center">
+						<Label text="Hora" />
+						<ui:template>
+							<Text text="{path: 'Proyect>HORARIOS'}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="auto" hAlign="Center" >
+						<Label text="Estatus"  />
+						<ui:template >
+							<!--<ObjectStatus-->
+							<!--	class="sapUiSmallMarginTop"-->
+							<!--	text="Unknown"-->
+							<!--	icon="sap-icon://status-inactive"-->
+							<!--	state="None" />-->
+							<ObjectStatus
+								text="{Proyect>STATUS}"
+								class="sapUiSmallMarginBottom"
+								icon="{= ${Proyect>STATUS}==='Disponible'?'sap-icon://accept':'sap-icon://decline'}"
+								state="{= ${Proyect>STATUS}==='Disponible'?'Success':'Error'}" />
+						</ui:template>
+					</ui:Column>
+														
+				
+														
+					<!--<ui:Column width="7rem" hAlign="Center" >-->
+					<!--	<Label text="Seleccionar" />-->
+					<!--	<ui:template>-->
+						<!--	<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Center" renderType="Div" visible="true" displayInline="false">-->
+      <!--          			<items>-->
+      <!--          					<RadioButton textAlign="Center" textDirection="Inherit" groupName="GroupA"  visible="{= ${Proyect>Sta}==='No Disponible'?false:true}" selected="false" />-->
+						<!--	</items>-->
+						<!--</HBox>-->
+						
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+												
+			</ui:columns>
+		</ui:Table>
+						
+						
+						
+        </content>
+        
+        <buttons>
+        	<Button text="No Programados" icon="" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="fnPressNoProgramadoTemp"/>
+			<!--<Button text="Continuar" icon="sap-icon://arrow-right" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CancelarGuardarRoles1"/>-->
+			<Button text="Continuar" icon="sap-icon://arrow-right" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="fnContinuarCitaTemp"/>
+			<Button text="Cerrar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialogSeleccionarFecha"/>
+
+        </buttons>
+        
+        
+    
+    </Dialog>
+</core:FragmentDefinition>

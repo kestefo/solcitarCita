@@ -1,0 +1,190 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "com.rava",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.2.2"
+		},
+		"dataSources": {
+			"local": {
+				"uri": "/here/goes/your/serviceUrl/local/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "ach",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.3.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"_version": "1.5.0",
+		"rootView": {
+			"viewName": "generated.app.view.Page1",
+			"type": "XML",
+			"asyn": true,
+			"id": "Page1"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"Proyect": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": true
+			},
+			"Horario": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": true
+			},
+			"RegistroEntrega": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": true
+			},
+			"EntregaSinOC": {
+				"preload": true,
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"ItemsSinOC": {
+				"preload": true,
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"ItemsModCondEnt": {
+				"preload": true,
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"ItemsSinOCCondEnt": {
+				"preload": true,
+				"type": "sap.ui.model.json.JSONModel"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			],
+			"js": [
+				{
+					"uri": "libs/jspdf.min.js"
+				},
+				{
+					"uri": "libs/jspdf.js"
+				},
+				{
+					"uri": "./js/FileSaver.js"
+				},
+				{
+					"uri": "./js/jquery.wordexport.js"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.rava.view",
+				"controlId": "App",
+				"clearTarget": false,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"Page1"
+					]
+				}
+			},
+			"targets": {
+				"Page1": {
+					"controlAggregation": "pages",
+					"viewName": "Page1",
+					"viewId": "Page1",
+					"viewLevel": 1,
+					"transition": "slide"
+				},
+				"Registro": {
+					"controlAggregation": "pages",
+					"viewName": "Registro",
+					"viewId": "Registro",
+					"viewLevel": 2,
+					"transition": "slide"
+				},
+				"EntregasOC": {
+					"controlAggregation": "pages",
+					"viewName": "EntregasOC",
+					"viewId": "EntregasOC",
+					"viewLevel": 3,
+					"transition": "slide"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "Page1/:context:",
+					"name": "Page1",
+					"target": [
+						"Page1"
+					]
+				},
+				{
+					"pattern": "Registro/:context:",
+					"name": "Registro",
+					"target": [
+						"Registro"
+					]
+				},
+				{
+					"pattern": "EntregasOC/:context:",
+					"name": "EntregasOC",
+					"target": [
+						"EntregasOC"
+					]
+				}
+			]
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

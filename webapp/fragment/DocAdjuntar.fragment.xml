@@ -1,0 +1,240 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Page1" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog   horizontalScrolling="true" showHeader="false" state="None" stretch="false"  type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding">
+        <content>
+            <ui:Table
+            		rows			="{Proyect>/Data12}"	
+					selectionMode	="None"
+					visibleRowCount	="4"
+					ariaLabelledBy	="title">
+            	<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos del Material (3)"/>
+					</OverflowToolbar>
+				</ui:extension>
+            	
+				<ui:columns>
+													
+					<ui:Column width="6rem">
+						<Label text="ID Doc." />
+						<ui:template>
+							<Text text="{Proyect>ID}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc." />
+						<ui:template>
+							<Text text="{Proyect>Descripcion}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="6rem" hAlign="Center" >
+						<Label text="Obligatorio"  />
+						<ui:template >
+							<ObjectStatus
+								
+								class="sapUiSmallMarginBottom"
+								icon="{Proyect>Oblig}"
+								state="{Proyect>Status}" />
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo" />
+						<ui:template> 
+							<Text text="{Proyect>Nombre}"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="12rem">
+						<Label text="Fecha de Vencimiento" />
+						<ui:template>
+							<Text text="{Proyect>Fecha}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="5rem" hAlign="Center" >
+						<Label text="Adjuntar" />
+						<ui:template>
+			              <Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>
+						</ui:template>
+					</ui:Column>
+												
+			</ui:columns>
+		</ui:Table>
+            
+            
+            
+        <ui:Table
+            rows			="{Proyect>/Data13}"	
+			selectionMode	="None"
+			visibleRowCount	="4"
+			ariaLabelledBy	="title">
+            	<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos de los Proveedores-Personal (3)"/>
+					</OverflowToolbar>
+				</ui:extension>
+            	
+				<ui:columns>
+					
+					<ui:Column width="5.5rem">
+						<Label text="Dni" />
+						<ui:template>
+							<Text text="{Proyect>Dni}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="12rem">
+						<Label text="Nombre y Apellidos" />
+						<ui:template>
+							<Text text="{Proyect>Nom}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+													
+					<ui:Column width="5.5rem">
+						<Label text="ID Doc." />
+						<ui:template>
+							<Text text="{Proyect>ID}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc." />
+						<ui:template>
+							<Text text="{Proyect>Descripcion}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="6rem" hAlign="Center" >
+						<Label text="Obligatorio"  />
+						<ui:template >
+							<ObjectStatus
+								
+								class="sapUiSmallMarginBottom"
+								icon="{Proyect>Oblig}"
+								state="{Proyect>Status}" />
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo" />
+						<ui:template> 
+							<Text text="{Proyect>Nombre}"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="10rem">
+						<Label text="Fecha de Vencimiento" />
+						<ui:template>
+							<Text text="{Proyect>Fecha}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="5rem" hAlign="Center" >
+						<Label text="Adjuntar" />
+						<ui:template>
+			              <Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto" enabled="{= ${path: 'pedido', formatter: '.formatter.realizoEnvio'}? false:true}" iconDensityAware="false" press="_onButtonAceptar"/>
+						</ui:template>
+					</ui:Column>
+												
+			</ui:columns>
+		</ui:Table>    
+            
+        <ui:Table
+            rows			="{Proyect>/Data23}"	
+			selectionMode	="None"
+			visibleRowCount	="4"
+			ariaLabelledBy	="title">
+            	<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos de los Proveedores-Vehiculos (2)"/>
+					</OverflowToolbar>
+				</ui:extension>
+            	
+				<ui:columns>
+					
+					<ui:Column width="6rem">
+						<Label text="Placa" />
+						<ui:template>
+							<Text text="{Proyect>Pla}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+													
+					<ui:Column width="5.5rem">
+						<Label text="ID Doc." />
+						<ui:template>
+							<Text text="{Proyect>ID}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc." />
+						<ui:template>
+							<Text text="{Proyect>Descripcion}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="6rem" hAlign="Center" >
+						<Label text="Obligatorio"  />
+						<ui:template >
+							<ObjectStatus
+								
+								class="sapUiSmallMarginBottom"
+								icon="{Proyect>Oblig}"
+								state="{Proyect>Status}" />
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo" />
+						<ui:template> 
+							<Text text="{Proyect>Nombre}"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="12rem">
+						<Label text="Fecha de Vencimiento" />
+						<ui:template>
+							<Text text="{Proyect>Fecha}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="5rem" hAlign="Center" >
+						<Label text="Adjuntar" />
+						<ui:template>
+			              <Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto" enabled="{= ${path: 'pedido', formatter: '.formatter.realizoEnvio'}? false:true}" iconDensityAware="false" press="_onButtonAceptar"/>
+						</ui:template>
+					</ui:Column>
+												
+			</ui:columns>
+		</ui:Table>    
+            
+        </content>
+        
+        <buttons>
+            <Button text="Resumen" press="Resumen" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+            <Button text="Cancelar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CancelarDialogRoles"/>
+        </buttons>
+        
+        
+        
+        <customHeader/>
+        <endButton/>
+        <subHeader/>
+    </Dialog>
+</core:FragmentDefinition>

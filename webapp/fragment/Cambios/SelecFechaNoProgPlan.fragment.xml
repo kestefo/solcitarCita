@@ -1,0 +1,66 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Page1" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:l				="sap.ui.layout"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog id="DialogSelecFechaNoProgPlanTemp"  horizontalScrolling="true" showHeader="true"   state="None" stretch="false" title="Seleccionar Fecha" type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding"
+        contentHeight="auto" 
+        contentWidth="auto">
+        <content>
+			<!--<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">-->
+			<!--	<items>-->
+			<!--		<Label text="Cita No Programada" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--	</items>-->
+			<!--</HBox>-->
+				
+			<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+				<items>
+					<HBox  width="10rem">
+						<Label text="{Proyect>/DataFechaNoProg/0/TitleFecha}" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					</HBox>
+					<DatePicker id="CitafechaNoProgPlan" change="eventchangeFechaNoProgTemp" navigate="cambioNoProgTemp" placeholder="DD.MM.YYYY" width="auto" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd.MM.yyyy" displayFormat = "dd.MM.yyyy"/>
+				</items>
+			</HBox>
+			
+			<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+				<items>
+					<HBox  width="10rem">
+						<Label text="Hora" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					</HBox>
+					<TimePicker
+						id="TP2"
+						value=""
+						enabled="false"
+						change="fnCitaHoraNoProgTemp" 
+						valueFormat="HH:mm"
+						displayFormat="HH:mm"
+						maskMode="On"
+						placeholder="HH:mm" />
+				</items>
+			</HBox>
+			
+			<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+				<items>
+					<HBox  width="10rem">
+						<Label text="Cant. Entregas" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					</HBox>
+					<Text id="nEntregaSeleccionadasNoProgPlan" text="" visible="true"/>
+				</items>
+			</HBox>
+			
+        </content>
+        
+        <buttons>
+        	<Button text="Guardar" icon="sap-icon://save" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="fnContinuarCitaPlanTemp"/>
+			<!--<Button text="Continuar" icon="sap-icon://arrow-right" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="fnContinuarCitaTemp"/>-->
+			<Button text="Cerrar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialogSelecFechaNoProgTemp"/>
+        </buttons>
+        
+        
+    
+    </Dialog>
+</core:FragmentDefinition>

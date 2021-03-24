@@ -1,0 +1,304 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.rava.project.controller.Page1" xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form" xmlns:ui="sap.ui.table">
+	<Dialog id="DialogMant" horizontalScrolling="true" showHeader="false" state="None" stretch="false" type="Standard" verticalScrolling="true"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<!--<Table id="tableMateriales2" width="auto" noDataText="No data" mode="SingleSelectLeft" showSeparators="All" growing="true"-->
+			<!--	growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{/recipient/materiales}">-->
+			<!--	<infoToolbar>-->
+			<!--		<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">-->
+			<!--			<content>-->
+			<!--				<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</content>-->
+			<!--		</Toolbar>-->
+			<!--	</infoToolbar>-->
+			<!--	<headerToolbar>-->
+			<!--		<OverflowToolbar width="auto" height="auto" design="Transparent" visible="false" enabled="true">-->
+			<!--			<content>-->
+			<!--				<Title text="Items (3)" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>-->
+			<!--				<ToolbarSpacer width=""/>-->
+			<!--				<OverflowToolbarButton text="Sort" type="Transparent" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="true"-->
+			<!--					iconDensityAware="false"/>-->
+			<!--				<OverflowToolbarButton text="Filter" type="Transparent" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true"-->
+			<!--					iconDensityAware="false"/>-->
+			<!--				<OverflowToolbarButton text="Group" type="Transparent" icon="sap-icon://group-2" iconFirst="true" width="auto" enabled="true" visible="true"-->
+			<!--					iconDensityAware="false"/>-->
+			<!--				<OverflowToolbarButton text="Settings" type="Transparent" icon="sap-icon://action-settings" iconFirst="true" width="auto" enabled="true"-->
+			<!--					visible="true" iconDensityAware="false"/>-->
+			<!--			</content>-->
+			<!--		</OverflowToolbar>-->
+			<!--	</headerToolbar>-->
+			<!--	<columns>-->
+			<!--		<Column width="4%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="ID Doc." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--		<Column width="80px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="Descripcion Doc." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--		<Column width="150px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="Obligatorio" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--		<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="Nombre del Archivo" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--		<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="Fecha de Vencimiento" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--		<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">-->
+			<!--			<header>-->
+			<!--				<Text text="Adjuntar" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--			</header>-->
+			<!--			<footer/>-->
+			<!--		</Column>-->
+			<!--	</columns>-->
+			<!--	<items>-->
+			<!--		<ColumnListItem type="Inactive" press="._onNavEdit">-->
+			<!--			<cells>-->
+			<!--				<Text text="{ID_DOCUMENTO}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--				<Text text="{DESCRIPCION_DOCUMENTO}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--				<ObjectStatus class="sapUiSmallMarginBottom" icon="{=${OBLIGATORIO} === 1?'sap-icon://locked' : 'sap-icon://unlocked'}"-->
+			<!--					state="{=${OBLIGATORIO} === 1?'Success' : 'Warning'}"/>-->
+			<!--				<Text text="{fileName}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+			<!--				<DatePicker id="gg" models="" visible="false" fieldGroupIds="" value="" width="" enabled="true" valueState="None" placeholder=""-->
+			<!--							editable="true"></DatePicker>-->
+			<!--				<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"-->
+			<!--					enabled="{= ${path: 'pedido', formatter: '.formatter.realizoEnvio'}? false:true}" iconDensityAware="false" press="attachFileProvPer"/>-->
+			<!--			</cells>-->
+			<!--		</ColumnListItem>-->
+			<!--	</items>-->
+			<!--</Table>-->
+			<ui:Table id="tableMateriales" rows="{/recipient/materiales}" selectionMode="None" visibleRowCount="4" ariaLabelledBy="title">
+				<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos del Material"/>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column width="6rem">
+						<Label text="Entrega"/>
+						<ui:template>
+							<Text text="{ENTREGA}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="9.5rem">
+						<Label text="Nro de Guia"/>
+						<ui:template>
+							<Text text="{NroGuia}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+				
+					<ui:Column width="6rem">
+						<Label text="ID Doc."/>
+						<ui:template>
+							<Text text="{ID_DOCUMENTO}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc."/>
+						<ui:template>
+							<Text text="{DESCRIPCION_DOCUMENTO}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="6rem" hAlign="Center">
+						<Label text="Obligatorio"/>
+						<ui:template >
+							<ObjectStatus class="sapUiSmallMarginBottom" icon="{=${OBLIGATORIO} === 1?'sap-icon://locked' : 'sap-icon://unlocked'}"
+								state="{=${OBLIGATORIO} === 1?'Success' : 'Warning'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo"/>
+						<ui:template>
+							<Text text="{fileName}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="12rem">
+						<Label text="Fecha de Vencimiento"/>
+						<ui:template>
+							<DatePicker models="" minDate="{Proyect>/FechaMin}"  visible="{=${fileName} === ''? false: true}" fieldGroupIds="" value="{fechaVencimiento}" width="" enabled="true" valueState="None" placeholder=""
+										editable="true" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="handleChange"></DatePicker>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="5rem" hAlign="Center">
+						<Label text="Adjuntar"/>
+						<ui:template>
+							<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto" iconDensityAware="false" press="attachFileMaterial"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="4.5rem" hAlign="Center">
+						<Label text=""/>
+						<ui:template>
+							<Button type="Emphasized" text="Ver" enabled="{ver}" icon="" iconFirst="true" width="auto" iconDensityAware="false" press="VerPDFMaterial"/>
+						</ui:template>
+					</ui:Column>
+					
+					
+				</ui:columns>
+			</ui:Table>
+			<ui:Table id="tableDocProvPer" visible="{Proyect>/ElementosyTablas}" rows="{/recipient/provedorPer}" selectionMode="None" visibleRowCount="4" ariaLabelledBy="title">
+				<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos de los Proveedores-Personal"/>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column width="6rem">
+						<Label text="DNI"/>
+						<ui:template>
+							<Text text="{dni}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="12rem">
+						<Label text="Nombre y Apellidos"/>
+						<ui:template>
+							<Text text="{namApellidos}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="5.5rem">
+						<Label text="ID Doc."/>
+						<ui:template>
+							<Text text="{idDoc}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc."/>
+						<ui:template>
+							<Text text="{descDoc}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="6rem" hAlign="Center">
+						<Label text="Obligatorio"/>
+						<ui:template >
+							<ObjectStatus class="sapUiSmallMarginBottom" icon="{=${oblig} === 1 ? 'sap-icon://locked' : 'sap-icon://unlocked'}"
+								state="{=${oblig} === 1?'Success' : 'Warning'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo"/>
+						<ui:template>
+							<Text text="{fileName}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="10rem">
+						<Label text="Fecha de Vencimiento"/>
+						<ui:template>
+							<DatePicker models="" minDate="{Proyect>/FechaMin}"  visible="{=${fileName} === ''? false: true}" fieldGroupIds="" value="{fechaVencimiento}" width="" enabled="true" valueState="None" placeholder=""
+										editable="true" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="handleChange"></DatePicker>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="5rem" hAlign="Center">
+						<Label text="Adjuntar"/>
+						<ui:template>
+							<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"
+								enabled="{= ${path: 'pedido', formatter: '.formatter.realizoEnvio'}? false:true}" iconDensityAware="false" press="attachFileProvPer"/>
+						</ui:template>
+					</ui:Column>
+						<ui:Column width="4.5rem" hAlign="Center">
+						<Label text=""/>
+						<ui:template>
+							<Button type="Emphasized" text="Ver" enabled="{ver}" icon="" iconFirst="true" width="auto" iconDensityAware="false" press="VerPDFDni"/>
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+			
+			
+			<ui:Table id="tableDocProvVeh" visible="{Proyect>/ElementosyTablas}" rows="{/recipient/provedorVeh}" selectionMode="None" visibleRowCount="4" ariaLabelledBy="title">
+				<ui:extension>
+					<OverflowToolbar>
+						<Title text="Documentos de los Proveedores-Vehiculos"/>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column width="6rem">
+						<Label text="Placa"/>
+						<ui:template>
+							<Text text="{placa}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="5.5rem">
+						<Label text="ID Doc."/>
+						<ui:template>
+							<Text text="{idDoc}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Descripcion Doc."/>
+						<ui:template>
+							<Text text="{descDoc}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="6rem" hAlign="Center">
+						<Label text="Obligatorio"/>
+						<ui:template >
+							<ObjectStatus class="sapUiSmallMarginBottom" icon="{=${oblig} === 1 ? 'sap-icon://locked' : 'sap-icon://unlocked'}"
+								state="{=${oblig} === 1?'Success' : 'Warning'}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Nombre del Archivo"/>
+						<ui:template>
+							<Text text="{fileName}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="12rem">
+						<Label text="Fecha de Vencimiento"/>
+						<ui:template>
+							<DatePicker models="" minDate="{Proyect>/FechaMin}" visible="{=${fileName} === ''? false: true}" fieldGroupIds="" value="{fechaVencimiento}" width="" enabled="true" valueState="None" placeholder=""
+										editable="true" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="handleChange"></DatePicker>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="5rem" hAlign="Center">
+						<Label text="Adjuntar"/>
+						<ui:template>
+							<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"
+								enabled="true" iconDensityAware="false" press="attachFileProvVeh"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="4.5rem" hAlign="Center">
+						<Label text=""/>
+						<ui:template>
+							<Button type="Emphasized" text="Ver" enabled="{ver}" icon="" iconFirst="true" width="auto" iconDensityAware="false" press="VerPDFVehiculo"/>
+						</ui:template>
+					</ui:Column>
+					
+				</ui:columns>
+			</ui:Table>
+		</content>
+		<buttons>
+			<Button text="Guardar" press="saveAttachment" type="Emphasized" icon="sap-icon://save" iconFirst="true" width="120px" enabled="true" visible="false" iconDensityAware="false"/>
+			<Button text="{Proyect>/TextGuardar}" press="validateDoc" type="Accept" icon="sap-icon://bar-code" iconFirst="true" width="200px" enabled="true" visible="true" iconDensityAware="false"/>
+			<!--<Button text="Resumen" press="Resumen" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+			<Button text="Cancelar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="120px" enabled="true" visible="true"
+				iconDensityAware="false" press="CancelarDialogRolesMant"/>
+		</buttons>
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+	</Dialog>
+</core:FragmentDefinition>

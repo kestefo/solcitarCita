@@ -1,0 +1,62 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.rava.project.controller.Page1" xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form" xmlns:ui="sap.ui.table">
+	<Dialog id="DialogResumen" horizontalScrolling="true" showHeader="false" state="None" stretch="false" type="Standard"
+		verticalScrolling="true" class="sapUiResponsiveContentPadding" contentWidth="50%">
+		<content>
+			<ui:Table rows="{/data}" selectionMode="Multi" visibleRowCount="4" ariaLabelledBy="title">
+				<ui:extension>
+					<OverflowToolbar>
+						<Title text=""/>
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column width="8rem">
+						<Label text="Nº Dni/Vehiculo"/>
+						<ui:template>
+							<!--<ObjectNumber-->
+							<!--	textAlign="Center"-->
+							<!--                 		number="{Proyect>DV}" />-->
+							<Text text="{NUMERO_IDENTIFICACION}"/>
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="14rem">
+						<Label text="Nombres"/>
+						<ui:template>
+							<Text text="{NOMBRES}"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="9rem" hAlign="Center">
+						<Label text="Apellidos"/>
+						<ui:template >
+							<Text text="{APELLIDOS}"/>
+							<!--<ObjectNumber-->
+							<!--	textAlign="Center"-->
+							<!--                 		number="{Proyect>Ape}" />-->
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+		</content>
+		<!--<beginButton>-->
+		<!--		<Button text="Embalar"  icon="sap-icon://product"  type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="dasd"/>-->
+		<!--<ToolbarSpacer/>-->
+		<!--</beginButton>-->
+		<buttons>
+			<Button text="Enviar" icon="sap-icon://paper-plane" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="EnviarDoc"/>
+			<Button text="Guardar" type="Accept" icon="sap-icon://save" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="saveDocResumen"/>
+			<Button text="Eliminar" icon="sap-icon://delete" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="eliminarPerVeh"/>
+			<Button text="Cancelar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true"
+				iconDensityAware="false" press="CancelarResumen"/>
+		</buttons>
+		<!--<endButton>-->
+		<!--	<Button text="Embalar2"  icon="sap-icon://product"  type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="dasd"/>-->
+		<!--</endButton>-->
+		<customHeader/>
+		<endButton/>
+		<subHeader/>
+	</Dialog>
+</core:FragmentDefinition>

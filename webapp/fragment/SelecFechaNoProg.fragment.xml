@@ -1,0 +1,63 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Page1" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:l				="sap.ui.layout"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog id="DialogSelecFechaNoProg"  horizontalScrolling="true" showHeader="true"   state="None" stretch="false" title="Seleccionar Fecha" type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding"
+        contentHeight="60%" 
+        contentWidth="55%">
+        <content>
+			<HBox alignItems="Center" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+				<items>
+					<Label text="Ingrese Fecha" design="Standard" width="auto" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+					<DatePicker id="fecharangoInicialNoProg" change="eventchangeFechainicialNoProg" navigate="cambioRangoInicialNoProg" placeholder="DD.MM.YYYY" width="auto" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd.MM.yyyy" displayFormat = "dd.MM.yyyy"/>
+					<DatePicker id="fecharangoFinalNoProg" change="eventchangeFechaFinalNoProg" navigate="cambioRangoNoProg" placeholder="DD.MM.YYYY" width="auto" required="false" valueStateText="Invalid entry" enabled="true" visible="true" valueFormat="dd.MM.yyyy" displayFormat = "dd.MM.yyyy"/>
+					<Label text="Nº Entrega" design="Standard" width="auto" required="false" textAlign="Begin" textDirection="Inherit" visible="true" class="sapUiLargeMarginBegin"/>
+					<Input id="nEntregaNoProg" type="Text" value=""  showValueHelp="false" enabled="false" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0" class="sapUiSmallMarginBegin"/>
+				</items>
+			</HBox>
+				
+						
+			<ui:Table
+					id					="idTableRegistroDisponibleNoProg"
+					rows				="{Proyect>/DataFechaNoProg}"	
+					selectionMode		="Multi"
+					selectionBehavior	=""
+					visibleRowCount		="8"
+					enableSelectAll="false"
+					rowSelectionChange	="ValidarCamposFechaNoProg"
+					ariaLabelledBy	="title">
+				<ui:columns>
+					<ui:Column width="auto" hAlign="Center">
+						<Label text="{Proyect>/DataFechaNoProg/0/TitleFecha}" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{path: 'Proyect>FECHAS'}" />
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="auto" hAlign="Center">
+						<Label text="Hora" />
+						<ui:template>
+							<Text text="{Proyect>HORARIOS}"/>
+						</ui:template>
+					</ui:Column>
+				</ui:columns>
+			</ui:Table>
+							
+        </content>
+        
+        <buttons>
+			<!--<Button text="Guardar" icon="sap-icon://save" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="GuardarFechaNoProg"/>-->
+			<Button text="Continuar" icon="sap-icon://arrow-right" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="fnContinuarGuardarFechaNoProgTemp"/>
+			<Button text="Cerrar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialogSelecFechaNoProg"/>
+        </buttons>
+        
+        
+    
+    </Dialog>
+</core:FragmentDefinition>

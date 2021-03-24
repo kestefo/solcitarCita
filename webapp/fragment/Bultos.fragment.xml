@@ -1,0 +1,163 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Registro" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog  horizontalScrolling="true" showHeader="false" state="None" stretch="false" title="Actualizar Roles" type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding">
+        <content>
+        	
+		<ui:TreeTable
+					id					="treetableDataBultosMateriales"
+					rows				="{path:'Proyect>/DataPlani', parameters: {arrayNames:['Array']}}"
+					selectionMode		="Multi"
+					rowSelectionChange	="ValidarCamposBM"
+					selectionBehavior	="RowOnly"
+					visibleRowCount		="9"
+					enableSelectAll		="false"
+					ariaLabelledBy		="title">
+				<!--<ui:extension>-->
+				<!--	<OverflowToolbar>-->
+				<!--		<ToolbarSpacer/>-->
+				<!--		<Button text="Collapse all" press="onCollapseAll"/>-->
+				<!--	</OverflowToolbar>-->
+				<!--</ui:extension>-->
+		
+				<ui:columns>
+					
+					
+					<!--<ui:Column width="4rem">-->
+					<!--	<Label text="" />-->
+					<!--	<ui:template>-->
+							
+					<!--	<CheckBox  selected="true" visible="{= !!${Proyect>V}}" />-->
+						
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<ui:Column width="11rem">
+						<Label text="Identificador" />
+						<ui:template>
+							<HBox  alignItems="Center">
+								<items>
+								<CheckBox  selected="" visible="{= !!${Proyect>V}}" />
+							
+							<ObjectNumber
+								
+								textAlign="Center"
+                        		number="{Proyect>Descripcion}"  />
+                        		
+                        		</items>
+							</HBox>
+						
+							<!--<Text text="{Proyect>Descripcion}"  wrapping="false"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					
+						<ui:Column width="11rem" hAlign="Center">
+						<Label text="Tipo de Bulto" />
+						<ui:template>
+					
+						
+							<Text text="{Proyect>TipoBulto1}"  wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="11rem">
+						<Label text="Material" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>MatnrD}" />
+							<!--<Text text="{Proyect>Descripcion}"  wrapping="false"/>-->
+						</ui:template>
+					</ui:Column>
+					<ui:Column width="22rem" hAlign="Center" >
+						<Label text="Denominación" />
+						<ui:template>
+								<Text text="{Proyect>Txz01D}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="6rem">
+						<Label text="Cantidad"/>
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>MengezuD}" />
+								<!--<Text text="{Proyect>cant}" wrapping="false"/>-->
+							
+						</ui:template>
+					</ui:Column>
+					
+					
+					<ui:Column width="6rem" hAlign="Center" >
+						<Label text="Unidad"  />
+						<ui:template>
+								<Text text="{Proyect>MeinsD}" wrapping="false"/>
+							
+						</ui:template>
+					</ui:Column>
+					
+					<!--<ui:Column width="7rem" >-->
+					<!--	<Label text="Material"/>-->
+					<!--	<ui:template>-->
+							
+					<!--			<Text text="{Proyect>Material}" wrapping="false"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<!--<ui:Column width="6rem">-->
+					<!--	<Label text="Cantidad"/>-->
+					<!--	<ui:template>-->
+					<!--			<Text text="{Proyect>Cantidad}" wrapping="false"/>-->
+							
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<!--<ui:Column width="6rem" hAlign="Center" >-->
+					<!--	<Label text="Cantidad Total"/>-->
+					<!--	<ui:template>-->
+				
+					<!--		<Button  visible="{= !!${Proyect>Cantidad}}" type="Emphasized"  icon="sap-icon://accept" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<!--<ui:Column width="10rem" hAlign="Center">-->
+					<!--	<Label text="Lote"/>-->
+					<!--	<ui:template>-->
+							
+					<!--			<ObjectStatus-->
+					<!--			visible="{= !!${Proyect>Tipo}}"-->
+					<!--			class="sapUiSmallMarginBottom"-->
+					<!--			icon="sap-icon:{= ${Proyect>Tipo}==='X'?'//locked':'//unlocked'}"-->
+					<!--			state="{= ${Proyect>Tipo}==='X'?'Success':'Warning'}" />-->
+								
+								<!--<Text text="{Proyect>Tipo}" wrapping="false"/>-->
+							
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+				</ui:columns>
+			</ui:TreeTable>
+            
+        </content>
+        
+        <buttons>
+        	<Button text="Disvincular" icon=""  type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="desvincular"/>
+        	<!--<Button text="Adjuntar Documentos" icon="" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="AdjuntarDoc"/>-->
+
+            <Button text="Guardar" icon="sap-icon://save"  type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="GuardarBultos"/>
+            <Button text="Atrás" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialogBultos"/>
+        </buttons>
+        
+        
+        
+        <customHeader/>
+        <endButton/>
+        <subHeader/>
+    </Dialog>
+</core:FragmentDefinition>

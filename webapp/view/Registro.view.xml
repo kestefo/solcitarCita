@@ -1,0 +1,252 @@
+<mvc:View 
+xmlns:core="sap.ui.core"
+xmlns:mvc		="sap.ui.core.mvc"
+controllerName	="com.rava.controller.Registro" 
+xmlns			="sap.m"
+xmlns:form		="sap.ui.layout.form"
+xmlns:html		="http://www.w3.org/1999/xhtml"
+xmlns:dnd		="sap.ui.core.dnd"
+xmlns:ui		="sap.ui.table"
+xmlns:tnt		="sap.tnt">
+	<html:style>
+	.sapMListTblCell.cellBorderRight {
+	border-right: 1px solid lightgray;
+	border-top: 1px solid lightgray;
+}
+
+.sapMListTblCell.cellBorderLeft {
+	border-left: 1px solid lightgray;
+}
+
+		
+	</html:style>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page showHeader="true" title="Solicitar Cita" showFooter="true" showNavButton="false">
+        <content>
+        	
+		<ui:Table
+			id					="tableRegistro"
+    		rows				="{path:'Proyect>/DataMateriales' , sorter :[
+    		{
+        	path: 'Ebeln', 
+        	descending: false 
+    		},
+    		{
+    		path: 'EbelpD', 
+        	descending: false
+    		}
+    		] }"	
+			selectionMode		="Multi"
+			visibleRowCount		="11"
+			rowSelectionChange	="onSelectionChange"
+			ariaLabelledBy		="title">
+				 
+            	<ui:extension>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button text="Modificar Cond. Entrega" press="fnPressModificarCondEntrega" icon="" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+						<Button text="Embalar" press="Embalar" icon="sap-icon://product" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+						<Button text="Cerrar" press ="CerrarRegistro" type="Reject" icon="sap-icon://decline" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+					</OverflowToolbar>
+				</ui:extension>
+				
+					 <!--<ui:rowSettingsTemplate>-->
+				  <!--      <ui:RowSettings highlight="{Proyect>Status}" />-->
+				  <!--    </ui:rowSettingsTemplate>-->
+				      
+				 <!--    <ui:plugins>-->
+					<!--	<plugins:MultiSelectionPlugin-->
+					<!--		limit="{path: 'config>/limit', type: 'sap.ui.model.type.Integer'}"-->
+					<!--		enableNotification="true"-->
+					<!--		showHeaderSelector="{config>/showHeaderSelector}"-->
+					<!--		selectionChange="onSelectionChange"/>-->
+					<!--</ui:plugins>-->
+					<!--	<ui:Column width="10rem" hAlign="Center">-->
+					<!--	<Label text="Dias por Vencer" />-->
+					<!--	<ui:template>-->
+					<!--		<FlexBox-->
+					<!--		alignItems		="Start"-->
+					<!--		justifyContent	="Center">-->
+					<!--			<tnt:InfoLabel -->
+					<!--			renderMode="Loose" -->
+					<!--			colorScheme	="{Proyect>Status1}" -->
+					<!--			displayOnly	= "true" />-->
+					<!--			<tnt:InfoLabel -->
+					<!--			renderMode="Loose"-->
+					<!--			colorScheme	="{Proyect>Status2}" -->
+					<!--			displayOnly	= "true" />-->
+					<!--			<tnt:InfoLabel -->
+					<!--			renderMode="Loose"-->
+					<!--			colorScheme	="{Proyect>Status3}"-->
+					<!--			displayOnly	= "true" />-->
+					<!--		</FlexBox>-->
+							
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+				<ui:columns>
+					<ui:Column width="10rem" hAlign="Center">
+						<Label text="Cond. Entrega"/>
+						<ui:template>
+								<!--<ObjectStatus-->
+								<!--visible="{= !!${Proyect>Tipo}}"-->
+								<!--class="sapUiSmallMarginBottom"-->
+								<!--icon="sap-icon:{= ${Proyect>Tipo}==='X'?'//locked':'//unlocked'}"-->
+								<!--state="{= ${Proyect>Tipo}==='X'?'Success':'Warning'}" />-->
+								
+								<!--<Text text="{Proyect>lug}"/>-->
+								
+								<!--<Text text="{Proyect>Zlugent}" wrapping="false"/>-->
+								<Text text="{Proyect>DescCond}"/>
+								<!--LugEntD-->
+						</ui:template>
+					</ui:Column>
+													
+					<ui:Column width="8.2rem" hAlign="Center">
+						<Label text="Orden de Compra" />
+						<ui:template>
+								<!--<ObjectIdentifier title="{Proyect>OP}" text="" class="sapMTableContentMargin" />-->
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>Ebeln}" />
+							<!--<Text text="{Proyect>OP}" class ="letra"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="4.5rem" hAlign="Center">
+						<Label text="Posición" />
+						<ui:template>
+							<Text text="{Proyect>EbelpD}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="6rem" hAlign="Center" >
+						<Label text="Material"  />
+						<ui:template>
+							<Text text="{Proyect>MatnrD}"/>
+						<!--<ObjectStatus-->
+								
+							<!--	class="sapUiSmallMarginBottom"-->
+							<!--	icon="{Proyect>Oblig}"-->
+							<!--	state="{Proyect>Status}" />-->	
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="auto" hAlign="Center">
+						<Label text="Denominación" />
+						<ui:template> 
+							<Text text="{Proyect>Txz01D}"/>
+						</ui:template>
+					</ui:Column>
+					
+					<!--<ui:Column width="10.5rem" hAlign="Center">-->
+					<!--	<Label text="Fecha de Entrega OC" />-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{path:'Proyect>EindtD' , formatter : '.formatDate'}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<!--<ui:Column width="12rem" hAlign="Center"> Comentado temporalmente-->
+					<!--	<Label text="Fecha de Solicitar Cita" />-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{path:'Proyect>EindtpD' , formatter : '.formatDate'}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<ui:Column width="8.5rem" hAlign="Center">
+						<Label text="Fecha Entrega OC" />
+						<ui:template>
+							<Text text="{path:'Proyect>EindtpD' , formatter : '.formatDate'}"/>
+						</ui:template>
+					</ui:Column>
+														
+					<!--<ui:Column width="10rem" hAlign="Center" >-->
+					<!--	<Label text="Cantidad en Orden" />-->
+					<!--	<ui:template>-->
+							
+					<!--		<ObjectNumber-->
+					<!--			textAlign="Right"-->
+     <!--                   		number="{Proyect>MengeD}" />-->
+								<!--<Text text="{Proyect>Cant}"/>-->
+			              <!--<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<ui:Column width="9rem" hAlign="Center" >
+						<Label text="Pendiente de Envio" />
+						<ui:template>
+							
+							<ObjectNumber
+								textAlign="Right"
+                        		number="{Proyect>ObmngD}" />
+								<!--<Text text="{Proyect>Pen}"/>-->
+			              <!--<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="10rem" hAlign="Center" >
+						<Label text="Cantidad a Enviar" />
+						<ui:template>
+							<!--editable-->
+							<!--<ObjectNumber-->
+							<!--	textAlign="Center"-->
+       <!--                 		number="{Proyect>MengezuD}" />-->
+    						<Input id="regiscantidad" value="{Proyect>MengezuD}" change="ValidarDecimal" textAlign="Right" type="Number" showValueHelp="false" enabled="true" placeholder="Ingresar"/>
+								<!--<Text text="{Proyect>CantE}"/>-->
+			              <!--<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="3rem" hAlign="Center" >
+						<Label text="UM" />
+						<ui:template>
+							
+								<ObjectNumber
+								textAlign="Center"
+			                    unit="{Proyect>MeinsD}" />
+								<!--<Text text="{Proyect>UM}"/>-->
+			              <!--<Button type="Emphasized" icon="sap-icon://attachment" iconFirst="true" width="auto"  iconDensityAware="false" press="_onButtonAceptar"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<!--<ui:Column width="6rem" hAlign="Center">-->
+					<!--	<Label text="Urgencia" />-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{Proyect>PrioUrgtxD}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+					<!--<ui:Column width="11rem" hAlign="Center">-->
+					<!--	<Label text="Entrega no Programada" />-->
+					<!--	<ui:template>-->
+					<!--		<Text text="{Proyect>Entprog}"/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+												
+			</ui:columns>
+			
+			
+		</ui:Table>
+           
+            
+        </content>
+        <footer>
+            <OverflowToolbar width="auto" height="auto" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer/>
+                    <!--<Button text="Confirmar" type="Accept" icon="sap-icon://accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+                    <!--<Button text="Cerrar"	 press ="CerrarRegistro" type="Reject" icon="sap-icon://decline" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+        <subHeader/>
+        <customHeader/>
+    </Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

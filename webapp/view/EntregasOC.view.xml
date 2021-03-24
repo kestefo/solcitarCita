@@ -1,0 +1,310 @@
+<mvc:View 
+xmlns:mvc		="sap.ui.core.mvc"
+controllerName	="com.rava.controller.EntregasOC" 
+xmlns			="sap.m"
+xmlns:form		="sap.ui.layout.form" 
+xmlns:html		="http://www.w3.org/1999/xhtml"
+xmlns:core		="sap.ui.core"
+xmlns:ui		="sap.ui.table">
+	<!--<html:style>-->
+	<!--.sapMListTblCell.cellBorderRight {-->
+	<!--	border-right: 1px solid lightgray;-->
+	<!--	border-top: 1px solid lightgray;-->
+	<!--}-->
+	
+	<!--.sapMListTblCell.cellBorderLeft {-->
+	<!--	border-left: 1px solid lightgray;-->
+	<!--}-->
+	<!--</html:style>-->
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page showHeader="true" title="Entregas Sin Orden de Compra" showFooter="true" showNavButton="false">
+			        <content>
+			            <form:Form width="auto" editable="true" visible="true" class="sapUiResponsiveMargin">
+			                <!--<form:title>-->
+			                <!--    <core:Title text="ENTREGA SIN OC" level="Auto"/>-->
+			                <!--</form:title>-->
+			                <form:formContainers>
+			                    <form:FormContainer visible="true">
+			                        <form:formElements>
+			                        	<form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Condición Entrega" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+			                                    <Select 
+													id			="selectTipoCondEntregaOC"
+													change		="fnSelectedCondEntregaOC" 
+													width		="auto" 
+													items		="{EntregaSinOC>/DataItemsSinOCCondEnt}">
+													
+													<core:Item 	 key="{EntregaSinOC>CodigoCondicion}" text="{EntregaSinOC>DescripcionCondicion}" />
+												</Select>
+			                                </form:fields>
+			                            </form:FormElement>
+			                            <form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Destino" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+												<Select 
+													id			="selectDestinoOC"
+													change		="fnChangeInputsNotSelected" 
+													width		="auto" 
+													items		="{EntregaSinOC>/DataDestino}">
+													
+													<core:Item 	 key="{EntregaSinOC>Lgort}" text="{EntregaSinOC>Namel}" />
+												</Select>
+			                                </form:fields>
+			                            </form:FormElement>
+			                            <form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Cant Embalaje" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+			                                    <Text id="cantEmbalajeEntregaSinOC" text="0" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:fields>
+			                            </form:FormElement>
+			                            <form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Área Responsable" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+			                                    <Input liveChange="fnChangeInputsNotEmpty" id="areaResp" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+			                                </form:fields>
+			                            </form:FormElement>
+			                            <form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Motivo" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+			         <!--                       	<ComboBox id="selectMotivos" change="fnChangeOtros">-->
+												<!--	<core:Item key="key1" text="Entrega urgente, OC Pendiente" />-->
+												<!--	<core:Item key="key2" text="Material(s) / Equipo(s) en Alquiler" />-->
+												<!--	<core:Item key="key3" text="Muestras sin costo" />-->
+												<!--	<core:Item key="key4" text="Materiales referentes a una OS" />-->
+												<!--	<core:Item key="key5" text="Post-Venta / Garantia" />-->
+												<!--	<core:Item key="key6" text="Otros" />-->
+												<!--</ComboBox>-->
+												<Select 
+													id			="selectMotivos"
+													change		="fnChangeOtros" 
+													width		="auto" 
+													items		="{EntregaSinOC>/DataMotivos}">
+													
+													<core:Item 	 key="{EntregaSinOC>Motivo}" text="{EntregaSinOC>DescMotivo}" />
+												</Select>
+			                                    <Input liveChange="fnChangeInputsNotEmpty" id="otrosid" type="Text" showValueHelp="false" enabled="true" visible="false" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+			                                </form:fields>
+			                            </form:FormElement>
+			                        </form:formElements>
+			                        <form:title/>
+			                    </form:FormContainer>
+			                    <form:FormContainer visible="true">
+			                        <form:formElements>
+			                            <form:FormElement visible="true">
+			                                <form:label>
+			                                    <Label text="Email Destinatario Final" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+			                                </form:label>
+			                                <form:fields>
+			                                    <Input liveChange="fnChangeInputsNotEmptyEmail" id="emailIdDestFin" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+			                                </form:fields>
+			                            </form:FormElement>
+			                            
+			                        </form:formElements>
+			                        <form:title/>
+			                    </form:FormContainer>
+			                </form:formContainers>
+			                <form:layout>
+			                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+			                </form:layout>
+			            </form:Form>
+			            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false" class="sapUiResponsiveMargin">
+			                <items>
+			                    <form:SimpleForm maxContainerCols="4" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0"
+									emptySpanM="0" columnsL="2" columnsM="2">
+									<form:content>
+										<ui:TreeTable
+											id="tableEmbalajes"
+											rows="{path:'EntregaSinOC>/DataEmbalajes', parameters: {arrayNames:['ArrayGeneral']}}"
+											selectionMode="Multi"
+											visibleRowCount="4"
+											rowSelectionChange	="fnSelectionEmbalajes"
+											ariaLabelledBy="title">
+											<ui:extension>
+												<OverflowToolbar style="Clear">
+													<content>
+													<Title id="title" text="Embalajes"/>
+													<ToolbarSpacer width=""/>
+													<!--<OverflowToolbarButton id="idbtnTableEmbalajesAdd" text="añadir" press="fnPressAddEmbalajes" type="Transparent" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+													<!--<OverflowToolbarButton id="idbtnTableEmbalajesDelete" text="eliminar" press="fnPressDeleteEmbalajes" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+														<Button id="idbtnTableEmbalajesAdd" text="Agregar Embalajes" press="fnPressAddEmbalajes" type="Transparent" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+														<Button id="idbtnTableEmbalajesDelete" text="Eliminar Embalajes" press="fnPressDeleteEmbalajes" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+													</content>
+												</OverflowToolbar>
+											</ui:extension>
+											<ui:columns>
+												<ui:Column width="8rem" hAlign="Center">
+													<Label text="Nº Embalaje" />
+													<ui:template>
+														<Text text="{EntregaSinOC>nEmbalaje}" wrapping="false" />
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="10rem" hAlign="Center">
+													<Label text="Tipo de Embalaje" />
+													<ui:template>
+														<Select 
+															id			="selectTipoBultoEntregaOC"
+															change		="fnSelectedTipoBultoEntregaOC" 
+															width		="auto" 
+															selectedKey	="{EntregaSinOC>selectedKey}"
+															items		="{
+																path:'Proyect>/DataTipoBulto' , templateShareable:false
+															}">
+															
+															<core:Item 	 key="{Proyect>Vegr2}" text="{Proyect>Bezei}" />
+														</Select>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="auto" hAlign="Center">
+													<Label text="Descripción del Contenido" />
+													<ui:template>
+														<Input type="Text" value="{EntregaSinOC>descripcionContenido}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="5rem" hAlign="Center">
+													<Label text="Peso(Kg)" />
+													<ui:template>
+														<Input type="Number" value="{EntregaSinOC>peso}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="8rem" hAlign="Center">
+													<Label text="Longitud(Cm)" />
+													<ui:template>
+														<Input type="Number" value="{EntregaSinOC>longitud}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="10rem" hAlign="Center">
+													<Label text="Ancho(Cm)" />
+													<ui:template>
+														<Input type="Number" value="{EntregaSinOC>ancho}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="12rem" hAlign="Center">
+													<Label text="Altura(Cm)" />
+													<ui:template>
+														<Input type="Number" value="{EntregaSinOC>altura}"/>
+													</ui:template>
+												</ui:Column>
+											</ui:columns>
+										</ui:TreeTable>
+									</form:content>
+								</form:SimpleForm>
+								<form:SimpleForm maxContainerCols="4" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0"
+									emptySpanM="0" columnsL="2" columnsM="2">
+									<form:content>
+										<ui:TreeTable
+											id="tableItems"
+											rows="{path:'EntregaSinOC>/DataItems', parameters: {arrayNames:['ArrayGeneral']}}"
+											selectionMode="Multi"
+											visibleRowCount="4"
+											ariaLabelledBy="title"
+											rowSelectionChange	="fnSelectionItems"
+											visible="true">
+											<ui:extension>
+												<OverflowToolbar style="Clear">
+													<content>
+													<Title id="titleItems" text="Items"/>
+													<ToolbarSpacer width=""/>
+													<Button id="idbtnTableItemsAdd" text="Agregar Items" press="fnPressAddItems" type="Transparent" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+													<Button id="idbtnTableItemsDelete" text="Eliminar Items" press="fnPressDeleteItems" type="Transparent" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+													</content>
+												</OverflowToolbar>
+											</ui:extension>
+											<ui:columns >
+												<ui:Column width="8rem" hAlign="Center">
+													<Label text="Nº Embalaje" />
+													<ui:template>
+														<Text text="{EntregaSinOC>nEmbalaje}" wrapping="false" />
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="5rem" hAlign="Center">
+													<Label text="Item" />
+													<ui:template>
+														<Text text="{EntregaSinOC>itemkey}" wrapping="false" />
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="auto" hAlign="Center">
+													<Label text="Descripción del Material" />
+													<ui:template>
+														<Input type="Text" value="{EntregaSinOC>descripcionMaterial}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="5rem" hAlign="Center">
+													<Label text="Cantidad" />
+													<ui:template>
+														<Input type="Number" value="{EntregaSinOC>cantidad}"/>
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="8rem" hAlign="Center">
+													<Label text="UNM Material" />
+													<ui:template>
+														<ComboBox
+															showSecondaryValues= "true"
+															change="fnSelectedUnmMaterial"
+															selectedKey	="{EntregaSinOC>selectedKey}"
+															items="{
+																path: 'EntregaSinOC>/DataUnmMed', templateShareable:false
+															}">
+															<!--<core:Item key="{EntregaSinOC>Mseh3}" text="{EntregaSinOC>Msehi}" />-->
+															<core:ListItem key="{EntregaSinOC>Msehi}" text="{EntregaSinOC>Msehl}" additionalText = "{EntregaSinOC>Msehi}" />
+														</ComboBox>
+														<!--<ComboBox-->
+														<!--	showSecondaryValues= "true"-->
+														<!--	items="{-->
+														<!--		path: '/CountriesCollection',-->
+														<!--		sorter: { path: 'text' }-->
+														<!--	}">-->
+														<!--	<core:ListItem key="{key}" text="{text}" additionalText = "{key}"/>-->
+														<!--</ComboBox>-->
+													</ui:template>
+												</ui:Column>
+												<ui:Column width="auto" hAlign="Center">
+													<Label text="Observación Material" />
+													<ui:template>
+														<Input type="Text" value="{EntregaSinOC>obsMaterial}"/>
+													</ui:template>
+												</ui:Column>
+											</ui:columns>
+										</ui:TreeTable>
+									</form:content>
+								</form:SimpleForm>
+			                </items>
+			            </VBox>
+			        </content>
+			        <footer>
+			            <OverflowToolbar width="auto" height="auto" design="Auto" enabled="true" visible="true">
+			                <content>
+			                	<!--<Button id="EntrSinOC" text="Entregas sin OC"  press="fnPedidosTerceros"  type="Emphasized" icon="" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>-->
+			                    <ToolbarSpacer width=""/>
+			                    <Button id="guardarEntregaOC" text="Guardar"  press="fnPressGuardarOC"  type="Accept" icon="sap-icon://save" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+			                	<Button id="cancelarEntregaOC" text="Cancelar" press="fnCancelarOC" icon="sap-icon://cancel" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+			                  
+			                	
+			                 <!-- 	<Button id="Modificar" text="Modificar Fecha"  press="ButtonAbriFechaPlan"  type="Accept" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>-->
+			                	<!--<Button id="Modificar1" text="Modificar Bulto"  press="ModificarEntrega"  type="Accept" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>-->
+			                	<!--<Button id="Modificar2" text="Eliminar Entrega"  press="EliminarEntrega"  type="Reject" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>-->
+			                
+			                </content>
+			            </OverflowToolbar>
+			        </footer>
+			    </Page>
+			 </pages>
+		</App>
+	</Shell>
+</mvc:View>
+
+
+
+

@@ -1,0 +1,292 @@
+<mvc:View 
+	controllerName="com.rava.controller.Page1" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	displayBlock="true" 
+	xmlns:html		="http://www.w3.org/1999/xhtml"
+	xmlns:ui		="sap.ui.table"
+	xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					
+					<headerContent>
+        		<HBox>
+					<Button press="regresarAlLaunchpad" icon="sap-icon://home"/>
+					<ToolbarSpacer width=""/>
+					<Button press="refresGeneral" icon="sap-icon://refresh"/>
+				</HBox>
+				</headerContent>
+				
+					<content>
+						<IconTabBar
+							select = "Planificar"
+							class = "sapUiResponsiveContentPadding">
+							<items>
+								<IconTabFilter
+									icon		="sap-icon://grid"
+									iconColor	="Positive"
+									design		="Horizontal"
+									class		="sapUiResponsiveContentPadding"
+									text		="Pedidos por Embalar"
+									key			="A" >
+									<content>
+										<ui:TreeTable
+											id					="TreeTable"
+											rows				="{path:'Proyect>/DataPedidosEmbalar', parameters: {arrayNames:['ArrayGeneral']} , 
+											sorter : {path : 'Ebeln' , descending: true }}"
+											selectionMode		="Multi"
+											rowSelectionChange	="ValidarCamposEmbalar"
+											visibleRowCount		="11"
+											enableSelectAll		="false"
+											ariaLabelledBy		="title">
+											<ui:columns>
+												<ui:Column autoResizable="true" resizable="true" width="24rem" hAlign="Center">
+													<Label text="Sociedad" />
+													<ui:template>
+														<Text text="{Proyect>DescripcionGeneral}"  wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+									
+												<ui:Column autoResizable="true" resizable="true" width="10rem" hAlign="Center" sortProperty	="Ebeln" filterProperty	="Ebeln">
+													<Label text="Orden de Compras"/>
+													<ui:template>
+														<Text text="{Proyect>Ebeln}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+									
+												<ui:Column autoResizable ="true" resizable ="true" width ="7rem" hAlign ="Center" sortProperty ="Bedat" filterProperty ="Bedat">
+													<Label text="Fecha de OC"/>
+													<ui:template>
+														<Text text="{path:'Proyect>Bedat' , formatter : '.formatCell'}"  wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+									
+												<ui:Column autoResizable ="true" resizable ="true" width ="16rem" hAlign ="Center" sortProperty ="NameTextc" filterProperty ="NameTextc">
+													<Label text="Comprador"/>
+													<ui:template>
+														<Text text="{Proyect>NameTextc}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+											</ui:columns>
+										</ui:TreeTable>
+									</content>
+								</IconTabFilter>
+						
+								<IconTabSeparator />
+						
+								<IconTabFilter
+									icon		="sap-icon://list"
+									iconColor	="Positive"
+									class		="sapUiResponsiveContentPadding"
+									design		="Horizontal"
+									text		="Generar Cita"
+									key			="B" >
+								
+									<content>
+										<ui:TreeTable
+											id					="TreeTable1"
+											rows				="{path:'Proyect>/DataEntregasPendientes', parameters: {arrayNames:['ArrayGeneral']}}"
+											selectionMode		="Multi"
+											rowSelectionChange	="ValidarCamposPendientes"
+											visibleRowCount		="11"
+											enableSelectAll		="false"
+											ariaLabelledBy		="title">
+										
+											<ui:columns>
+												<ui:Column width="9rem" hAlign="Center" sortProperty="DescripcionGeneralEntrega" filterProperty="DescripcionGeneralEntrega" autoResizable="true">
+													<Label text="Número de Entrega"/>
+													<ui:template>
+														<Text text="{Proyect>DescripcionGeneralEntrega}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="10rem" hAlign="Center" sortProperty="almdestino" filterProperty="almdestino" autoResizable="true">
+													<Label text="Almacén Destino" />
+													<ui:template>
+														<Text text="{Proyect>almdestino}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="18rem" hAlign="Center" sortProperty="lugdestino" filterProperty="lugdestino" autoResizable="true">
+													<Label text="Condición de Entrega" />
+													<ui:template>
+														<Text text="{Proyect>desclugardestino}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="10rem" hAlign="Center">
+													<Label text="Cantidad de Embalaje" />
+													<ui:template>
+														<ObjectNumber
+														textAlign="Center"
+														number="{path:'Proyect>cantbulto', formatter : '.formatCellCantTotalBultos'}"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="10rem" hAlign="Center">
+													<Label text="Peso Total(Kg)" />
+														<ui:template>
+															<ObjectNumber
+																textAlign="Center"
+																number="{Proyect>pesototalbulto}"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="12rem" hAlign="Center">
+													<Label text="Estatus" />
+													<ui:template>
+														<Text text="{path:'Proyect>descEstatus'}" visible="{= !!${Proyect>status}}" wrapping="false"/>
+													</ui:template>
+												</ui:Column>
+											
+												<ui:Column width="11rem" hAlign="Center" >
+													<Label text="Materiales"/>
+													<ui:template>
+														<Button 
+														text			="Ver"
+														type			="Emphasized" 
+														icon			="sap-icon://show"
+														iconFirst		="true" 
+														width			="auto" 
+														enabled			="true" 
+														press			="DialogMaterialesTemp"
+														visible			="true"
+														iconDensityAware="false" />
+													</ui:template>
+												</ui:Column>
+											</ui:columns>
+										</ui:TreeTable>
+									</content>
+									</IconTabFilter>
+									
+								<IconTabSeparator />
+						
+								<IconTabFilter
+									icon		="sap-icon://list"
+									iconColor	="Positive"
+									class		="sapUiResponsiveContentPadding"
+									design		="Horizontal"
+									text		="Citas y Entregas"
+									key			="C" >
+									<content>
+										<ui:TreeTable
+											id					="TreeTable2"
+											rows				="{path:'Proyect>/DataEntregasPlanificadas', parameters: {arrayNames:['ArrayGeneral']}}"
+											selectionMode		="Multi"
+											rowSelectionChange	="ValidarCamposPlan"
+											visibleRowCount		="11"
+											enableSelectAll		="false"
+											ariaLabelledBy		="title">
+								
+											<ui:columns>
+												<ui:Column width="12rem" filterProperty="citas" sortProperty="citas">
+													<Label text="Citas"/>          
+													<ui:template>
+														<Text text="{Proyect>entprogramadas}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="8rem" filterProperty="status" sortProperty="status">
+													<Label text="Estatus"/>          
+													<ui:template>
+														<Text text="{Proyect>descEstatus}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="5rem" filterProperty="numCitas" sortProperty="numCitas">
+													<Label text="N° Citas"/>          
+													<ui:template>
+														<Text text="{Proyect>numCitas}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="6rem" filterProperty="entrega" sortProperty="entrega">
+													<Label text="Entregas"/>          
+													<ui:template>
+														<Text text="{Proyect>DescripcionGeneralEntrega}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="11rem" filterProperty="alamcenDest" sortProperty="alamcenDest">
+													<Label text="Almacén Destino" />
+													<ui:template>
+														<Text text="{Proyect>almdestino}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="9rem" filterProperty="proveedor" sortProperty="proveedor">
+													<Label text="Nº Guia" />
+													<ui:template>
+														<Text text="{Proyect>Proveedor}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="11rem" filterProperty="centroDistr" sortProperty="centroDistr">
+													<Label text="Condición Entrega"/>
+													<ui:template>
+														<Text text="{Proyect>lugdestino}" />
+													</ui:template>
+													</ui:Column>
+													
+												<ui:Column width="10rem" filterProperty="fechaCita" sortProperty="fechaCita">
+													<Label text="Fecha de Entrega" />
+													<ui:template>
+														<Text text="{path:'Proyect>fecha', formatter : '.formatCell2'}" wrapping="false"/>
+													</ui:template>   
+												</ui:Column>
+												
+												<ui:Column width="8rem" filterProperty="horaCita" sortProperty="horaCita">
+													<Label text="Hora de Entrega"/>
+													<ui:template>
+														<Text text="{path:'Proyect>hora', formatter : '.formatCellAbapHours'}" wrapping="false"/>
+													</ui:template>      
+												</ui:Column>
+												
+												<ui:Column width="8rem" filterProperty="cantEmbalaj" sortProperty="cantEmbalaj" hAlign="End">
+													<Label text="Cant. Embalajes" />
+													<ui:template>
+														<Text text="{path:'Proyect>cantbulto', formatter : '.formatCellCantTotalBultos'}" />
+													</ui:template>
+													</ui:Column>
+													
+												<ui:Column width="10rem" filterProperty="pesoEmbalaj" sortProperty="pesoEmbalaj" hAlign="End">
+													<Label text="Peso Embalajes(Kg)" />
+													<ui:template>
+														<Text text="{Proyect>pesototalbulto}" />
+													</ui:template>
+												</ui:Column>
+												
+												<ui:Column width="10rem" hAlign="Center">
+													<Label text="Resumen Materiales" />
+													<ui:template>
+														<Button text="Ver" type="Emphasized" icon="sap-icon://show" iconFirst="true" width="auto" press="DialogMaterialesPlanTemp "/>
+													</ui:template>
+												</ui:Column>
+											</ui:columns>
+										</ui:TreeTable>
+									</content>
+								</IconTabFilter>
+							</items>
+						</IconTabBar>
+					</content>
+					<footer>
+						<OverflowToolbar width="auto" height="auto" design="Auto" enabled="true" visible="true">
+							<content>
+								<ToolbarSpacer width=""/>
+								<Button id="EntrSinOC" text="Entregas sin OC"  press="fnPedidosTerceros"  type="Emphasized" icon="" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+								<Button id="Registrar" text="Registrar"  press="Registrar"  type="Accept" icon="" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+								<Button id="Plani" text="Planificar" press="ButtonAbriFecha" icon="sap-icon://timesheet" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="false" iconDensityAware="false"/>
+								
+								<Button id="Modificar" text="Modificar Registro"  press="ModificarEntregaTemp"  type="Accept" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>
+								<Button id="Modificar1" text="Modificar Fecha"  press="ButtonAbriFechaPlan"  type="Accept" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>
+								<Button id="Modificar2" text="Eliminar Registro"  press="EliminarEntrega"  type="Reject" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="false" visible="false" iconDensityAware="false"/>
+							
+							</content>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

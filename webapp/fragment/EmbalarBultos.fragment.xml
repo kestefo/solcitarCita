@@ -1,0 +1,332 @@
+<core:FragmentDefinition
+xmlns:core			="sap.ui.core"
+controllerName		="com.rava.controller.Registro" 
+xmlns				="sap.m" 
+xmlns:form			="sap.ui.layout.form"
+xmlns:ui			="sap.ui.table">
+	
+	
+    <Dialog id="DialogEmbalarBultos" horizontalScrolling="true" showHeader="false" state="None" stretch="false"  type="Standard" verticalScrolling="true" class="sapUiResponsiveContentPadding">
+        <content>
+			<ui:TreeTable
+					id					="tableBultos"
+            		rows				="{path:'Proyect>/DataBultos',parameters: {arrayNames:['Array']}}"	
+					selectionMode		="Multi"
+					enableSelectAll		="false"
+					rowSelectionChange	="ValidarCamposBultos"
+					visibleRowCount		="6"
+					ariaLabelledBy		="title">
+           	
+            	<ui:extension>
+					<OverflowToolbar>
+						<Title id="TituloBultos" text="Numero de Embalaje ({= ${Proyect>/DataBultos/Array}.length })"/>
+						<ToolbarSpacer/>
+						<Button id="bottonBultoMenos" text="Embalaje" press="removeBultos" icon="sap-icon://less" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+						<Button id="bottonBulto" text="Embalaje" press="addBultos" icon="sap-icon://add" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+					</OverflowToolbar>
+				</ui:extension>
+            	
+				<ui:columns>				
+					<ui:Column width="9rem" >
+						<Label text="Nº de Embalaje" />
+						<ui:template>
+							
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>Num}" />
+                        		
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}"  text="" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+						<ui:Column width="11rem">
+						<Label text="Tipo de Embalaje" />
+						<ui:template>
+							
+						<Select 
+						id			="selectTipoBulto"
+						visible		="{= !!${Proyect>Num}}"
+						change		="SeleccionarTipo1" 
+					
+						width		="auto" 
+						selectedKey	="{Proyect>TipoBulto}"
+						items		="{Proyect>/DataTipoBulto}">
+							
+							<core:Item 	 key="{Proyect>Vegr2}" text="{Proyect>Bezei}" />
+						</Select>
+							<!--enabled 	="{Proyect>enabledTpB}" -->
+							<!--visible		="{= !!${Proyect>Num}}"-->
+					
+						</ui:template>
+					</ui:Column>
+					
+					<!--<ui:Column width="9rem" hAlign="Center">-->
+					<!--	<Label text="Cantidad" />-->
+					<!--	<ui:template>-->
+							
+					<!--	<Input -->
+					<!--		type		="Text"-->
+					<!--		textAlign	="Right" -->
+					<!--		liveChange  ="ValidarNumbers"-->
+					<!--		value		="{Proyect>CantBulto}"-->
+					<!--		width		="auto" -->
+					<!--		visible		="{= !!${Proyect>Num}}"-->
+					<!--		placeholder	="Cantidad "/>-->
+					<!--	</ui:template>-->
+					<!--</ui:Column>-->
+					
+														
+					<ui:Column width="12rem">
+						<Label text="Descripción del Contenido" />
+						<ui:template>
+							<Input 
+							type		="Text"
+							value		="{Proyect>Observacion}"
+							width		="auto" 
+							visible		="{= !!${Proyect>Num}}"
+							placeholder	="Ingresar Contenido"/>
+							<!--<Text text="{Proyect>ob}"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="9rem" hAlign="Center" >
+						<Label text="Peso (Kg)"  />
+						<ui:template >
+							<Input 
+							type		="Text"
+							textAlign	="Right"
+							visible		="{= !!${Proyect>Num}}"
+							value		="{Proyect>PesoBulto}" 
+							width		="auto" 
+							placeholder	="Peso"/>
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="7rem">
+						<Label text="Longitud (cm)" />
+						<ui:template> 
+							<Input
+							type		="Text"
+							textAlign	="Right"
+							value		="{Proyect>Longitud}" 
+							width		="auto" 
+							visible		="{= !!${Proyect>Num}}"
+							placeholder	="Longitud"/>
+							<!--<Text text="{Proyect>lo}"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="7rem">
+						<Label text="Ancho (cm)" />
+						<ui:template> 
+							<Input 
+							type		="Text"
+							textAlign	="Right"
+							visible		="{= !!${Proyect>Num}}"
+							value		="{Proyect>Ancho}" 
+							width		="auto"
+							placeholder	="Ancho"/>
+							<!--<Text text="{Proyect>an}"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="7rem">
+						<Label text="Altura (cm)" />
+						<ui:template> 
+							<!--<Input textAlign="Right" Type="Number" value="{Proyect>al}" width="auto"/>-->
+							<Input 
+							textAlign	="Right"
+							type		="Text" 
+							visible		="{= !!${Proyect>Num}}"
+							value		="{Proyect>Altura}" 
+							width		="auto" 
+							placeholder	="Altura"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="9rem" hAlign="Center">
+						<Label text="Pedido de Compra" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>EbelnD}" />
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="6rem" hAlign="Center">
+						<Label text="Pos." />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>EbelpD}" />
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="8rem" hAlign="Center" >
+						<Label text="Material" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>MatnrD}" />
+							<!--<Text text="{Proyect>Descripcion}"  wrapping="false"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="17rem" hAlign="Center" >
+						<Label text="Denominación" />
+						<ui:template>
+								<Text text="{Proyect>Txz01D}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="9rem" hAlign="End" >
+						<Label text="Cantidad Embalada"/>
+						<ui:template>
+							<ObjectNumber
+								textAlign="End"
+                        		number="{Proyect>MengezuD}" />
+								<!--<Text text="{Proyect>cant}" wrapping="false"/>-->
+							
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="9rem" hAlign="Center" >
+						<Label text="Observación"/>
+						<ui:template>
+							<Button text="Ver" visible="{= !${Proyect>Num}}" type="Emphasized" icon="sap-icon://show" iconFirst="true" width="auto" press="DialogVerObs"/>
+						</ui:template>
+					</ui:Column>
+					
+				</ui:columns>
+			</ui:TreeTable>
+            
+            
+            
+			<ui:Table
+				id					="tableMateriales"
+	            rows				="{Proyect>/DataMaterialesSeleccionados}"	
+				selectionMode		="Multi"
+				visibleRowCount		="6"
+				rowSelectionChange	="ValidarCamposMateriales"
+				ariaLabelledBy		="title">
+				
+            	<ui:extension>
+					<OverflowToolbar>
+						<Title id="TituloResumen" text="Materiales ({= ${Proyect>/DataMaterialesSeleccionados}.length })"/>
+					</OverflowToolbar>
+				</ui:extension>
+            	
+				<ui:columns>	
+				<ui:Column width="8.5rem" hAlign="Center">
+						<Label text="Pedido de Compra" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>EbelnD}" />
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="4rem" hAlign="Center">
+						<Label text="Pos." />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>EbelpD}" />
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+					
+					
+					<ui:Column width="6rem" hAlign="Center">
+						<Label text="Material" />
+						<ui:template>
+							<ObjectNumber
+								textAlign="Center"
+                        		number="{Proyect>MatnrD}" />
+							<!--<Text text="{Proyect>Num}"/>-->
+							<!--<ObjectIdentifier title="{Proyect>ID}" text="" titleActive="false" visible="true"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="10rem" hAlign="Center"> 
+						<Label text="Cantidad a Embalar" />
+						<ui:template>
+							<Input 
+							id="cantidad_Entrega" 
+							submit		="onSubmit" 
+							liveChange  ="ValidarNumbers"
+							textAlign="Right" 
+							value="{Proyect>MengezuD}" 
+							type="Text"
+							showValueHelp="false"
+							enabled="true" 
+							placeholder="Ingresar"/>
+							<!--{Proyect>enabled}-->
+						</ui:template>
+					</ui:Column>
+					
+					<ui:Column width="10rem" hAlign="Right"> 
+						<Label text="Cantidad Total" />
+						<ui:template>
+							<Text text="{Proyect>CantTotal}" />
+							<!--<Input id="cantidad_Entrega"  textAlign="Right" value="{Proyect>MengezuD}" type="Number" showValueHelp="false" enabled="{Proyect>enabled}" placeholder="Ingresar"/>-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="4rem" hAlign="Center" >
+						<Label text="Unidad"  />
+						<ui:template >
+							
+							<Text text="{Proyect>MeinsD}"/>
+							<!--<ObjectStatus-->
+								
+							<!--	class="sapUiSmallMarginBottom"-->
+							<!--	icon="{Proyect>Oblig}"-->
+							<!--	state="{Proyect>Status}" />-->
+						</ui:template>
+					</ui:Column>
+														
+					<ui:Column width="auto" hAlign="Center" >
+						<Label text="Denominación" />
+						<ui:template> 
+							<Text text="{Proyect>Txz01D}"/>
+						</ui:template>
+					</ui:Column>	
+					
+					<ui:Column width="7rem" hAlign="Center" >
+						<Label text="Observación" />
+						<ui:template> 
+							<!--<Text text="{Proyect>obs}"/>-->
+							<Button text="Ver" enabled="{= ${Proyect>TdlinePos} === '' ?false:true}"  type="Emphasized" icon="sap-icon://show" iconFirst="true" width="auto" press="DialogVerObs"/>
+						</ui:template>
+					</ui:Column>
+					
+					<!--<ui:Column width="10rem" hAlign="Center">-->
+     <!--                   <Label text="" />-->
+     <!--                   <ui:template>-->
+     <!--                   	<Button text="Ver" type="Emphasized" icon="sap-icon://show" iconFirst="true" width="auto" press="DialogVerObs"/>-->
+     <!--                   </ui:template>-->
+     <!--               </ui:Column>-->
+					
+			</ui:columns>
+		</ui:Table> 
+            
+        </content>
+        <buttons>
+        	<Button text="Embalar"  icon="sap-icon://product"  type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CantidadParcial"/>
+            <!--<Button id = "BotonCantidadParcial" text="Cantidad Parcial" icon="" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CantidadParcial"/>-->
+    		<Button text="Vaciar" icon="sap-icon://delete"  type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="desvincular"/>
+    		<Button text="Guardar" icon="sap-icon://save"  type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="GuardarBultos"/>
+            <!--<Button text="Continuar"  icon=""  type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="Continuar"/>-->
+            <Button text="Cancelar" icon="sap-icon://decline" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="CerrarDialog"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
